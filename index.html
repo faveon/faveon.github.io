@@ -7,10 +7,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@300;400;500;800&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
-  html,body{height:100%;background:#fffacolor:#0A0A0A;font-family:'Montserrat',sans-serif;overflow-x:hidden;}
+  html,body{height:100%;background:#fff;color:#0A0A0A;font-family:'Montserrat',sans-serif;overflow-x:hidden;}
   body{min-height:100vh;display:flex;flex-direction:column;}
 
-  /* Header */
+  /* Navigation */
   nav {
     display:flex;justify-content:space-between;align-items:center;
     padding:1.5rem 2rem;
@@ -20,7 +20,7 @@
     z-index: 100;
   }
   .nav-logo img {
-    height:226px;
+    height:26px;
     filter: invert(1);
     display: block;
   }
@@ -28,44 +28,50 @@
     font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:#555;font-weight:600;
   }
 
-  /* Marquee */
+  /* Marquee - Fixed Well-defined Track */
   .marquee-container {
     width: 100%;
     overflow: hidden;
     white-space: nowrap;
     position: relative;
     z-index: 50;
+    display: flex;
   }
-  .marquee-top { background: #C8F000; padding: 12px 0; }
-  .marquee-bottom { background: #0A0A0A; padding: 12px 0; }
+  .marquee-top { background: #C8F000; padding: 14px 0; }
+  .marquee-bottom { background: #0A0A0A; padding: 14px 0; }
 
   .marquee-content {
-    display: inline-block;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
     animation: marquee-scroll 40s linear infinite;
+    min-width: 100%;
   }
   .marquee-content.reverse {
     animation: marquee-scroll-rev 45s linear infinite;
   }
 
   .marquee-item {
-    display: inline-block;
+    flex-shrink: 0;
     font-size: 0.72rem;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    margin-right: 4rem;
+    padding: 0 2rem; /* 여백을 padding으로 확보 */
     color: #0A0A0A;
+    display: flex;
+    align-items: center;
   }
   .marquee-bottom .marquee-item { color: #fff; }
-  .plus { opacity: 0.3; margin-left: 1.5rem; }
+  .plus { opacity: 0.3; margin-left: 1.5rem; font-weight: 400; }
 
   @keyframes marquee-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
   @keyframes marquee-scroll-rev {
-    0% { transform: translateX(-50%); }
-    100% { transform: translateX(0); }
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
   }
 
   /* Main Section */
@@ -78,7 +84,6 @@
     position: relative;
     z-index: 10;
   }
-
   .content-inner {
     max-width: 1200px;
     margin: 0 auto;
@@ -89,7 +94,6 @@
     font-size:0.6rem;letter-spacing:0.35em;text-transform:uppercase;color:#777;
     font-weight:600;margin-bottom:1.5rem;
   }
-
   h1 {
     font-family:'Cormorant Garamond',serif;
     font-weight:300;font-style:italic;
@@ -102,7 +106,6 @@
     width:50px;height:1px;background:#0A0A0A;
     margin:2.5rem 0;
   }
-
   .subtext {
     font-size:0.72rem;letter-spacing:0.08em;line-height:1.8;
     color:#222;font-weight:500;max-width:400px;
@@ -159,7 +162,7 @@
     z-index: 100;
   }
 
-  /* Background Gradient */
+  /* Wash Effect */
   .lime-wash {
     position:fixed; width:60vw; height:60vw; border-radius:50%;
     background:radial-gradient(circle, rgba(200,240,0,0.15) 0%, transparent 70%);
@@ -208,80 +211,11 @@
     <h1 class="line2">Soon.</h1>
     <div class="divider"></div>
     <p class="subtext">
-      A NEW HOME FOR CREATORS.<br><br>
-      NOT JUST BRIDGING PARTNERSHIPS. WE GROW TOGETHER.<br><br>
+      A NEW HOME FOR CREATORS.<br>
+      NOT JUST BRIDGING PARTNERSHIPS; WE GROW TOGETHER.<br><br>
       JOIN OUR CREATOR ACCELERATOR AND SCALE YOUR VISION.
     </p>
     
     <div class="notify-row">
       <div class="form-group">
-        <input class="notify-input" id="firstName" type="text" placeholder="FIRST NAME" />
-        <input class="notify-input" id="lastName" type="text" placeholder="LAST NAME" />
-      </div>
-      <div class="form-group">
-        <input class="notify-input" id="email" type="email" placeholder="YOUR@EMAIL.COM" />
-      </div>
-      <button class="notify-btn" id="notifyBtn" onclick="handleSubmit()">Notify Me</button>
-      <p class="notify-confirm" id="confirm">✓ &nbsp;YOU'RE ON THE LIST.</p>
-    </div>
-  </div>
-</main>
-
-<div class="marquee-container marquee-bottom">
-  <div class="marquee-content reverse">
-    <span class="marquee-item">Talent Management <span class="plus">+</span></span>
-    <span class="marquee-item">Creator Campaigns <span class="plus">+</span></span>
-    <span class="marquee-item">Creator Education <span class="plus">+</span></span>
-    <span class="marquee-item">Live Commerce <span class="plus">+</span></span>
-    <span class="marquee-item">Affiliate Program <span class="plus">+</span></span>
-    <span class="marquee-item">Talent Management <span class="plus">+</span></span>
-    <span class="marquee-item">Creator Campaigns <span class="plus">+</span></span>
-    <span class="marquee-item">Creator Education <span class="plus">+</span></span>
-    <span class="marquee-item">Live Commerce <span class="plus">+</span></span>
-    <span class="marquee-item">Affiliate Program <span class="plus">+</span></span>
-  </div>
-</div>
-
-<footer>
-  <span>© 2026 FAVE:ON</span>
-  <span>LOS ANGELES &bull; SEOUL</span>
-</footer>
-
-<script>
-function handleSubmit() {
-  var firstName = document.getElementById('firstName').value.trim();
-  var email = document.getElementById('email').value.trim();
-  
-  if (!firstName || !email) {
-    alert("Please enter your name and email.");
-    return;
-  }
-
-  var btn = document.getElementById('notifyBtn');
-  var confirmMsg = document.getElementById('confirm');
-  
-  btn.textContent = '...';
-  btn.disabled = true;
-
-  fetch('https://script.google.com/macros/s/AKfycbwh7sgBOq-Zalifwj6E--LM5s2eIWnjAqtUUSY7T-NNc257lFIfed_6n-i18tOAqP-Y/exec', {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ 
-        firstName: firstName, 
-        lastName: document.getElementById('lastName').value, 
-        email: email 
-    })
-  }).then(function() {
-    document.querySelectorAll('.form-group').forEach(el => el.style.display = 'none');
-    btn.style.display = 'none';
-    confirmMsg.style.display = 'block';
-  }).catch(function() {
-    btn.textContent = 'NOTIFY ME';
-    btn.disabled = false;
-  });
-}
-</script>
-
-</body>
-</html>
+        <input class="notify-input" id="firstName" type="text" placeholder="FIRST NAME"
