@@ -1,11 +1,7 @@
-import React from 'react';
+// Paste your full App.jsx code from ChatGPT canvas here
 
 function App() {
-  return (
-    <div className="App">
-      <h1>Hello, World!</h1>
-    </div>
-  );
+  return <div>Paste your full design code here</div>;
 }
 
 export default App;
