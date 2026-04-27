@@ -10,39 +10,34 @@
   html,body{height:100%;background:#fff;color:#0A0A0A;font-family:'Montserrat',sans-serif;overflow-x:hidden;}
   body{min-height:100vh;display:flex;flex-direction:column;}
 
-  /* Navigation */
+  /* Header & Logo Crop */
   nav {
     display:flex;justify-content:space-between;align-items:center;
-    padding:1.5rem 2rem;
+    padding:1rem 2rem;
     border-bottom:1px solid #F0F0F0;
     background:#fff;
     position:relative;
     z-index: 100;
   }
-.nav-logo {
-    height: 86px; /* (원래 높이 226px) - (위 70px + 아래 70px) = 86px */
-    overflow: hidden; /* 자른 부분 안보이게 */
+  .nav-logo {
+    height: 86px; /* 크롭 후 보여질 실제 높이 */
+    overflow: hidden;
     display: flex;
     align-items: center;
   }
-
   .nav-logo img {
-    height: 226px; /* 원본을 크게 띄우고 */
+    height: 226px; /* 요청한 226px 사이즈 */
     width: auto;
     object-fit: cover;
-    object-position: center 50%; /* 가운데 정렬 */
-    margin-top: 0; /* 필요시 미세조정 */
-    
-    /* 완전한 블랙을 위한 필터 조합 */
-    /* invert(1)만 하면 회색이 될 수 있어서 brightness와 contrast로 확실히 눌러버림 */
-    filter: invert(1) brightness(0) contrast(200%); 
+    object-position: center; 
+    filter: invert(1) brightness(0) contrast(1000%); /* 완전한 블랙 */
     display: block;
   }
   .nav-right {
     font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:#555;font-weight:600;
   }
 
-  /* Marquee - Fixed Well-defined Track */
+  /* Marquee - Fixed Track */
   .marquee-container {
     width: 100%;
     overflow: hidden;
@@ -71,7 +66,7 @@
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    padding: 0 2rem; /* 여백을 padding으로 확보 */
+    padding: 0 2rem;
     color: #0A0A0A;
     display: flex;
     align-items: center;
@@ -176,7 +171,7 @@
     z-index: 100;
   }
 
-  /* Wash Effect */
+  /* Background Wash */
   .lime-wash {
     position:fixed; width:60vw; height:60vw; border-radius:50%;
     background:radial-gradient(circle, rgba(200,240,0,0.15) 0%, transparent 70%);
@@ -199,7 +194,9 @@
 <div class="lime-wash wash-2"></div>
 
 <nav>
-  <div class="nav-logo"><img src="img/faveon (2).png" alt="fave:on" /></div>
+  <div class="nav-logo">
+    <img src="img/faveon (2).png" alt="fave:on" />
+  </div>
   <div class="nav-right">Creator &amp; Talent Agency</div>
 </nav>
 
@@ -232,4 +229,73 @@
     
     <div class="notify-row">
       <div class="form-group">
-        <input class="notify-input" id="firstName" type="text" placeholder="FIRST NAME"
+        <input class="notify-input" id="firstName" type="text" placeholder="FIRST NAME" />
+        <input class="notify-input" id="lastName" type="text" placeholder="LAST NAME" />
+      </div>
+      <div class="form-group">
+        <input class="notify-input" id="email" type="email" placeholder="YOUR@EMAIL.COM" />
+      </div>
+      <button class="notify-btn" id="notifyBtn" onclick="handleSubmit()">Notify Me</button>
+      <p class="notify-confirm" id="confirm">✓ &nbsp;YOU'RE ON THE LIST.</p>
+    </div>
+  </div>
+</main>
+
+<div class="marquee-container marquee-bottom">
+  <div class="marquee-content reverse">
+    <span class="marquee-item">Talent Management <span class="plus">+</span></span>
+    <span class="marquee-item">Creator Campaigns <span class="plus">+</span></span>
+    <span class="marquee-item">Creator Education <span class="plus">+</span></span>
+    <span class="marquee-item">Live Commerce <span class="plus">+</span></span>
+    <span class="marquee-item">Affiliate Program <span class="plus">+</span></span>
+    <span class="marquee-item">Talent Management <span class="plus">+</span></span>
+    <span class="marquee-item">Creator Campaigns <span class="plus">+</span></span>
+    <span class="marquee-item">Creator Education <span class="plus">+</span></span>
+    <span class="marquee-item">Live Commerce <span class="plus">+</span></span>
+    <span class="marquee-item">Affiliate Program <span class="plus">+</span></span>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 FAVE:ON</span>
+  <span>LOS ANGELES &bull; SEOUL</span>
+</footer>
+
+<script>
+function handleSubmit() {
+  var firstName = document.getElementById('firstName').value.trim();
+  var email = document.getElementById('email').value.trim();
+  
+  if (!firstName || !email) {
+    alert("Please enter your name and email.");
+    return;
+  }
+
+  var btn = document.getElementById('notifyBtn');
+  var confirmMsg = document.getElementById('confirm');
+  
+  btn.textContent = '...';
+  btn.disabled = true;
+
+  fetch('https://script.google.com/macros/s/AKfycbwh7sgBOq-Zalifwj6E--LM5s2eIWnjAqtUUSY7T-NNc257lFIfed_6n-i18tOAqP-Y/exec', {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ 
+        firstName: firstName, 
+        lastName: document.getElementById('lastName').value, 
+        email: email 
+    })
+  }).then(function() {
+    document.querySelectorAll('.form-group').forEach(el => el.style.display = 'none');
+    btn.style.display = 'none';
+    confirmMsg.style.display = 'block';
+  }).catch(function() {
+    btn.textContent = 'NOTIFY ME';
+    btn.disabled = false;
+  });
+}
+</script>
+
+</body>
+</html>
