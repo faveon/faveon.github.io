@@ -20,24 +20,25 @@
     z-index: 100;
   }
   .nav-logo {
-    height: 86px; /* 크롭 후 보여질 실제 높이 */
+    height: 100px;
     overflow: hidden;
     display: flex;
     align-items: center;
   }
   .nav-logo img {
-    height: 226px; /* 요청한 226px 사이즈 */
+    height: 226px;
     width: auto;
     object-fit: cover;
     object-position: center; 
-    filter: invert(1) brightness(0) contrast(1000%); /* 완전한 블랙 */
+    margin-top:=15px;
+    filter: invert(1) brightness(0) contrast(1000%);
     display: block;
   }
   .nav-right {
     font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:#555;font-weight:600;
   }
 
-  /* Marquee - Fixed Track */
+  /* Marquee - 무한 루프 최적화 */
   .marquee-container {
     width: 100%;
     overflow: hidden;
@@ -53,11 +54,11 @@
     display: flex;
     flex-shrink: 0;
     align-items: center;
-    animation: marquee-scroll 40s linear infinite;
+    animation: marquee-scroll 30s linear infinite; /* 속도 조절 가능 */
     min-width: 100%;
   }
   .marquee-content.reverse {
-    animation: marquee-scroll-rev 45s linear infinite;
+    animation: marquee-scroll-rev 35s linear infinite;
   }
 
   .marquee-item {
@@ -75,12 +76,12 @@
   .plus { opacity: 0.3; margin-left: 1.5rem; font-weight: 400; }
 
   @keyframes marquee-scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* 50% 지점에서 딱 끊김 없이 이어짐 */
   }
   @keyframes marquee-scroll-rev {
-    from { transform: translateX(-50%); }
-    to { transform: translateX(0); }
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
   }
 
   /* Main Section */
@@ -122,7 +123,7 @@
     margin-bottom: 3.5rem;
   }
 
-  /* Waitlist Form */
+  /* Form */
   .notify-row {
     display:flex;flex-direction:column;
     width:100%;
@@ -161,7 +162,6 @@
     color:#0A0A0A;font-weight:700;text-align:center;padding:10px 0;
   }
 
-  /* Footer */
   footer {
     padding:1.5rem 2rem;
     border-top:1px solid #F0F0F0;
@@ -171,7 +171,6 @@
     z-index: 100;
   }
 
-  /* Background Wash */
   .lime-wash {
     position:fixed; width:60vw; height:60vw; border-radius:50%;
     background:radial-gradient(circle, rgba(200,240,0,0.15) 0%, transparent 70%);
@@ -195,13 +194,18 @@
 
 <nav>
   <div class="nav-logo">
-    <img src="img/faveon (2).png" alt="fave:on" />
+    <img src="img/faveon__2_.png" alt="fave:on" />
   </div>
   <div class="nav-right">Creator &amp; Talent Agency</div>
 </nav>
 
 <div class="marquee-container marquee-top">
   <div class="marquee-content">
+    <span class="marquee-item">Beauty <span class="plus">+</span></span>
+    <span class="marquee-item">Entertainment <span class="plus">+</span></span>
+    <span class="marquee-item">Lifestyle <span class="plus">+</span></span>
+    <span class="marquee-item">Fashion <span class="plus">+</span></span>
+    <span class="marquee-item">Travel <span class="plus">+</span></span>
     <span class="marquee-item">Beauty <span class="plus">+</span></span>
     <span class="marquee-item">Entertainment <span class="plus">+</span></span>
     <span class="marquee-item">Lifestyle <span class="plus">+</span></span>
@@ -243,6 +247,11 @@
 
 <div class="marquee-container marquee-bottom">
   <div class="marquee-content reverse">
+    <span class="marquee-item">Talent Management <span class="plus">+</span></span>
+    <span class="marquee-item">Creator Campaigns <span class="plus">+</span></span>
+    <span class="marquee-item">Creator Education <span class="plus">+</span></span>
+    <span class="marquee-item">Live Commerce <span class="plus">+</span></span>
+    <span class="marquee-item">Affiliate Program <span class="plus">+</span></span>
     <span class="marquee-item">Talent Management <span class="plus">+</span></span>
     <span class="marquee-item">Creator Campaigns <span class="plus">+</span></span>
     <span class="marquee-item">Creator Education <span class="plus">+</span></span>
