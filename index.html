@@ -1,12 +1,277 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>fave:on</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fave:On — Coming Soon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@300;400;500;800&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;background:#fff;color:#0A0A0A;font-family:'Montserrat',sans-serif;}
+  body{min-height:100vh;display:flex;flex-direction:column;}
+
+  nav {
+    display:flex;justify-content:space-between;align-items:center;
+    padding:2rem 3rem;
+    border-bottom:1px solid #E0E0E0;
+    animation: fadeDown 0.8s ease both;
+  }
+  .nav-logo img {
+    height:32px;
+    filter: invert(1);
+  }
+  .nav-right {
+    font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:#444;font-weight:500;
+  }
+
+  main {
+    flex:1;display:flex;flex-direction:column;justify-content:center;
+    padding:4rem 3rem 5rem;
+    position:relative;
+    overflow:visible;
+  }
+  nav,main,footer{position:relative;z-index:1;}
+  .marquee-outer{position:relative;z-index:2;}
+
+  .eyebrow {
+    font-size:0.65rem;letter-spacing:0.35em;text-transform:uppercase;color:#555;
+    font-weight:500;margin-bottom:2rem;
+    animation: fadeUp 0.9s 0.2s ease both;
+  }
+
+  .headline-wrap { overflow:hidden; margin-bottom:0.5rem; }
+  h1 {
+    font-family:'Cormorant Garamond',serif;
+    font-weight:300;font-style:italic;
+    font-size:clamp(5rem,12vw,10rem);
+    line-height:1;letter-spacing:-0.02em;color:#0A0A0A;
+    animation: slideUp 1s 0.3s cubic-bezier(0.16,1,0.3,1) both;
+  }
+  h1.line2 {
+    animation-delay:0.45s;
+    padding-left:3rem;
+  }
+
+  .divider {
+    width:60px;height:1px;background:#0A0A0A;
+    margin:2.5rem 0;
+    animation: expandWidth 0.8s 0.7s ease both;
+  }
+
+  .subtext {
+    font-size:0.75rem;letter-spacing:0.12em;line-height:2;
+    color:#222;font-weight:400;max-width:320px;
+    text-transform:uppercase;
+    animation: fadeUp 0.9s 0.8s ease both;
+  }
+
+  .notify-row {
+    margin-top:3rem;
+    display:flex;flex-direction:column;
+    animation: fadeUp 0.9s 1s ease both;
+    width:360px;
+    background:transparent;
+    border:1px solid #C8F000;
+    padding:0.75rem;
+    gap:6px;
+  }
+  .notify-name-row {
+    display:flex;gap:6px;
+  }
+  .notify-email-row {
+    display:flex;gap:6px;
+  }
+  .notify-input {
+    border:1px solid #D0D0D0;
+    padding:0.75rem 1rem;
+    font-family:'Montserrat',sans-serif;font-size:0.7rem;
+    letter-spacing:0.1em;color:#0A0A0A;background:#fff;
+    outline:none;
+    flex:1;min-width:0;
+  }
+  .notify-input::placeholder{color:#bbb;}
+  .notify-btn {
+    border:1px solid #0A0A0A;background:#0A0A0A;color:#fff;
+    padding:0.75rem 0;
+    width:120px;flex-shrink:0;
+    font-family:'Montserrat',sans-serif;font-size:0.7rem;
+    letter-spacing:0.15em;text-transform:uppercase;
+    cursor:pointer;transition:background 0.2s,color 0.2s;
+  }
+  .notify-btn:hover{background:#C8F000;color:#0A0A0A;border-color:#C8F000;}
+  .notify-confirm {
+    display:none;
+    font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;
+    color:#0A0A0A;font-weight:600;margin-top:0.5rem;
+  }
+
+
+
+  footer {
+    padding:1.5rem 3rem;
+    border-top:1px solid #E0E0E0;
+    display:flex;justify-content:space-between;align-items:center;
+    animation: fadeUp 0.8s 1.1s ease both;
+  }
+  footer span {font-size:0.65rem;letter-spacing:0.15em;color:#555;text-transform:uppercase;}
+
+  .lime-wash-1 {
+    position:fixed;top:-20%;right:-10%;
+    width:600px;height:600px;border-radius:50%;
+    background:radial-gradient(circle, rgba(180,230,50,0.3) 0%, transparent 65%);
+    pointer-events:none;z-index:0;
+    animation: driftA 12s ease-in-out infinite alternate;
+  }
+  .lime-wash-2 {
+    position:fixed;bottom:-15%;left:-5%;
+    width:500px;height:500px;border-radius:50%;
+    background:radial-gradient(circle, rgba(160,220,30,0.22) 0%, transparent 65%);
+    pointer-events:none;z-index:0;
+    animation: driftB 15s ease-in-out infinite alternate;
+  }
+  nav,main,footer{position:relative;z-index:1;}
+  .marquee-outer{overflow:hidden;width:100%;position:relative;z-index:2;}
+  .marquee-top {
+    background:#C8F000;
+    padding:0.75rem 0;
+  }
+  .marquee-bottom {
+    background:#0A0A0A;
+    padding:0.75rem 0;
+  }
+  .marquee-track {
+    display:flex;white-space:nowrap;
+    animation:scrollLeft 25s linear infinite;
+  }
+  .marquee-track.rev { animation:scrollRight 28s linear infinite; }
+  .marquee-item {
+    display:inline-flex;align-items:center;gap:2rem;
+    font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;
+    font-weight:700;padding:0 2rem;color:#1a2200;
+  }
+  .marquee-bottom .marquee-item { color:#fff; }
+  .marquee-item .plus {
+    font-size:0.9rem;font-weight:400;opacity:0.6;
+  }
+  @keyframes scrollLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @keyframes scrollRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+  @keyframes driftA{from{transform:translate(0,0)}to{transform:translate(-30px,30px)}}
+  @keyframes driftB{from{transform:translate(0,0)}to{transform:translate(20px,-20px)}}
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  @keyframes slideUp{from{transform:translateY(100%)}to{transform:none}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes expandWidth{from{width:0}to{width:60px}}
+</style>
+</head>
+<body>
+
+<div class="lime-wash-1"></div>
+<div class="lime-wash-2"></div>
+
+<nav>
+  <div class="nav-logo"><img src="faveon__2_.png" alt="fave:on" /></div>
+  <div class="nav-right">Creator &amp; Talent Agency</div>
+</nav>
+
+<div class="marquee-outer">
+  <div class="marquee-top">
+    <div class="marquee-track">
+      <span class="marquee-item">Beauty <span class="plus">+</span></span>
+      <span class="marquee-item">Entertainment <span class="plus">+</span></span>
+      <span class="marquee-item">Lifestyle <span class="plus">+</span></span>
+      <span class="marquee-item">Fashion <span class="plus">+</span></span>
+      <span class="marquee-item">Travel <span class="plus">+</span></span>
+      <span class="marquee-item">Beauty <span class="plus">+</span></span>
+      <span class="marquee-item">Entertainment <span class="plus">+</span></span>
+      <span class="marquee-item">Lifestyle <span class="plus">+</span></span>
+      <span class="marquee-item">Fashion <span class="plus">+</span></span>
+      <span class="marquee-item">Travel <span class="plus">+</span></span>
+      <span class="marquee-item">Beauty <span class="plus">+</span></span>
+      <span class="marquee-item">Entertainment <span class="plus">+</span></span>
+      <span class="marquee-item">Lifestyle <span class="plus">+</span></span>
+      <span class="marquee-item">Fashion <span class="plus">+</span></span>
+      <span class="marquee-item">Travel <span class="plus">+</span></span>
+      <span class="marquee-item">Beauty <span class="plus">+</span></span>
+      <span class="marquee-item">Entertainment <span class="plus">+</span></span>
+      <span class="marquee-item">Lifestyle <span class="plus">+</span></span>
+      <span class="marquee-item">Fashion <span class="plus">+</span></span>
+      <span class="marquee-item">Travel <span class="plus">+</span></span>
+    </div>
+  </div>
+</div>
+
+<main>
+  <p class="eyebrow">We're almost ready</p>
+  <div class="headline-wrap"><h1>Coming</h1></div>
+  <div class="headline-wrap"><h1 class="line2">Soon.</h1></div>
+  <div class="divider"></div>
+  <p class="subtext">Beauty · Entertainment · Lifestyle<br>Fashion · Travel<br><br>A new home for creators.<br>Launching soon.</p>
+  <div class="notify-row">
+    <div class="notify-name-row">
+      <input class="notify-input" id="firstName" type="text" placeholder="First name" />
+      <input class="notify-input" id="lastName" type="text" placeholder="Last name" />
+    </div>
+    <div class="notify-email-row">
+      <input class="notify-input email-field" id="email" type="email" placeholder="your@email.com" />
+      <button class="notify-btn" id="notifyBtn" onclick="handleSubmit()">Notify Me</button>
+    </div>
+    <p class="notify-confirm" id="confirm">✓ &nbsp;You're on the list.</p>
+  </div>
+
+  <script>
+  function handleSubmit() {
+    var firstName = document.getElementById('firstName').value.trim();
+    var lastName = document.getElementById('lastName').value.trim();
+    var email = document.getElementById('email').value.trim();
+    if (!firstName || !email) return;
+    var btn = document.getElementById('notifyBtn');
+    btn.textContent = '...';
+    btn.disabled = true;
+    fetch('https://script.google.com/macros/s/AKfycbwh7sgBOq-Zalifwj6E--LM5s2eIWnjAqtUUSY7T-NNc257lFIfed_6n-i18tOAqP-Y/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ firstName: firstName, lastName: lastName, email: email })
+    }).then(function() {
+      document.getElementById('firstName').style.display = 'none';
+      document.getElementById('lastName').style.display = 'none';
+      document.getElementById('email').style.display = 'none';
+      btn.style.display = 'none';
+      var confirm = document.getElementById('confirm');
+      confirm.style.display = 'block';
+    }).catch(function() {
+      btn.textContent = 'Notify Me';
+      btn.disabled = false;
+    });
+  }
+  </script>
+
+</main>
+
+<div class="marquee-outer">
+  <div class="marquee-bottom">
+    <div class="marquee-track rev">
+      <span class="marquee-item">Talent Management <span class="plus">+</span></span>
+      <span class="marquee-item">Creator Campaigns <span class="plus">+</span></span>
+      <span class="marquee-item">Creator Education <span class="plus">+</span></span>
+      <span class="marquee-item">Creator Accelerator <span class="plus">+</span></span>
+      <span class="marquee-item">Live Commerce <span class="plus">+</span></span>
+      <span class="marquee-item">Affiliate Program <span class="plus">+</span></span>
+      <span class="marquee-item">Talent Management <span class="plus">+</span></span>
+      <span class="marquee-item">Creator Campaigns <span class="plus">+</span></span>
+      <span class="marquee-item">Creator Education <span class="plus">+</span></span>
+      <span class="marquee-item">Creator Accelerator <span class="plus">+</span></span>
+      <span class="marquee-item">Live Commerce <span class="plus">+</span></span>
+      <span class="marquee-item">Affiliate Program <span class="plus">+</span></span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 Fave:On</span>
+  <span>Los Angeles · Seoul</span>
+</footer>
+
+</body>
 </html>
