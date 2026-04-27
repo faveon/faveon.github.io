@@ -19,9 +19,23 @@
     position:relative;
     z-index: 100;
   }
+.nav-logo {
+    height: 86px; /* (원래 높이 226px) - (위 70px + 아래 70px) = 86px */
+    overflow: hidden; /* 자른 부분 안보이게 */
+    display: flex;
+    align-items: center;
+  }
+
   .nav-logo img {
-    height:26px;
-    filter: invert(1);
+    height: 226px; /* 원본을 크게 띄우고 */
+    width: auto;
+    object-fit: cover;
+    object-position: center 50%; /* 가운데 정렬 */
+    margin-top: 0; /* 필요시 미세조정 */
+    
+    /* 완전한 블랙을 위한 필터 조합 */
+    /* invert(1)만 하면 회색이 될 수 있어서 brightness와 contrast로 확실히 눌러버림 */
+    filter: invert(1) brightness(0) contrast(200%); 
     display: block;
   }
   .nav-right {
