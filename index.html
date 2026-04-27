@@ -54,11 +54,11 @@
     display: flex;
     flex-shrink: 0;
     align-items: center;
-    animation: marquee-scroll 60s linear infinite; /* 속도 조절 가능 */
+    animation: marquee-scroll 70s linear infinite; /* 속도 조절 가능 */
     min-width: 100%;
   }
   .marquee-content.reverse {
-    animation: marquee-scroll-rev 60s linear infinite;
+    animation: marquee-scroll-rev 85s linear infinite;
   }
 
   .marquee-item {
@@ -73,7 +73,12 @@
     align-items: center;
   }
   .marquee-bottom .marquee-item { color: #fff; }
-  .plus { opacity: 0.3; margin-left: 1.5rem; font-weight: 400; }
+
+.plus { 
+  opacity: 0.3; 
+  margin: 0 2rem; /* 좌우에 동일하게 2rem씩 간격을 줌 */
+  font-weight: 400; 
+}
 
   @keyframes marquee-scroll {
     0% { transform: translateX(0); }
